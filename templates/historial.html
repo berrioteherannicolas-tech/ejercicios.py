@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block titulo %}Historial{% endblock %}
+
+{% block contenido %}
+<h1>Historial</h1>
+
+{% if filas %}
+  <table class="historial">
+    <tr>
+      <th>Ejercicio</th>
+      <th>Entrada</th>
+      <th>Resultado</th>
+      <th>Fecha</th>
+    </tr>
+    {% for f in filas %}
+      <tr>
+        <td>{{ f.ejercicio }}</td>
+        <td>{{ f.entrada }}</td>
+        <td>{{ f.resultado }}</td>
+        <td>{{ f.fecha.strftime('%d/%m/%Y %H:%M') }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% else %}
+  <p>Todavía no hay registros. Usa un ejercicio y vuelve aquí.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block titulo %}Ejercicios de Python{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+     <nav>
+    <a href="{{ url_for('inicio') }}">Inicio</a>
+    <a href="{{ url_for('par_impar') }}">Par o impar</a>
+    <a href="{{ url_for('tabla') }}">Tabla</a>
+    <a href="{{ url_for('adivina') }}">Adivina</a>
+    <a href="{{ url_for('historial') }}">Historial</a>
+  </nav>
+
+    <main>
+        {% block contenido %}{% endblock %}
+    </main>
+</body>
+
+</html>

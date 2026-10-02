@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block titulo %}Adivina el número{% endblock %}
+
+{% block contenido %}
+<h1>Adivina el número</h1>
+<p>Estoy pensando en un número del 1 al 100.</p>
+{% if not acerto %}
+<form method="post" action="{{ url_for('adivina') }}">
+    <label for="intento">Tu intento</label>
+    <input id="intento" type="number" name="intento" min="1" max="100" required>
+    <button type="submit">Probar</button>
+</form>
+{% endif %}
+
+{% if mensaje %}
+<p class="{{ 'resultado' if acerto else 'pista' }}">{{ mensaje }}</p>
+{% endif %}
+
+{% if error %}
+<p class="error">{{ error }}</p>
+{% endif %}
+
+{% if not acerto and intentos > 0 %}
+<p>Intentos hasta ahora: {{ intentos }}</p>
+{% endif %}
+
+<a href="{{ url_for('adivina', reiniciar=1) }}">
+    {{ 'Jugar otra vez' if acerto else 'Reiniciar' }}
+</a>
+{% endblock %}

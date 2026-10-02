@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block titulo %}Par o impar{% endblock %}
+
+{% block contenido %}
+<h1>Par o impar</h1>
+
+<form method="post">
+  <label for="numero">Número</label>
+  <input id="numero" type="number" name="numero" required>
+  <button type="submit">Verificar</button>
+</form>
+
+{% if resultado %}
+  <p class="resultado {{ clase }}">{{ resultado }}</p>
+
+  <div class="parejas {{ clase }}">
+    {% for i in range(pares) %}
+      <div class="pareja">
+        <span class="punto"></span><span class="punto"></span>
+      </div>
+    {% endfor %}
+
+    {% if sobra %}
+      <div class="pareja sola">
+        <span class="punto"></span>
+      </div>
+    {% endif %}
+  </div>
+
+  <p class="explicacion">
+    {% if clase == 'par' %}
+    {% else %}
+      Un punto se quedó sin pareja: por eso es impar.
+    {% endif %}
+    {% if recortado %}(todos los puntos tienen pareja.){% endif %}
+  </p>
+{% endif %}
+
+{% if error %}
+  <p class="error">{{ error }}</p>
+{% endif %}
+
+{% if resultado or error %}
+  <a class="reiniciar" href="{{ url_for('par_impar') }}">Probar otro número</a>
+{% endif %}
+{% endblock %}

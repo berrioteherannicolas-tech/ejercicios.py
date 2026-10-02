@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block titulo %}Tabla de multiplicar{% endblock %}
+
+{% block contenido %}
+<h1>Tabla de multiplicar</h1>
+
+<form method="post" action="{{ url_for('tabla') }}">
+  <label for="numero">Número</label>
+  <input id="numero" type="number" name="numero" required>
+  <button type="submit">Mostrar tabla</button>
+</form>
+
+{% if error %}
+  <p class="error">{{ error }}</p>
+{% endif %}
+
+{% if n is not none %}
+  <h2>Tabla del {{ n }}</h2>
+  <table>
+    {% for a, b, c in filas %}
+      <tr>
+        <td>{{ a }} × {{ b }}</td>
+        <td class="valor">{{ c }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+
+  <a class="reiniciar" href="{{ url_for('tabla') }}">Probar otro número</a>
+{% endif %}
+{% endblock %}
